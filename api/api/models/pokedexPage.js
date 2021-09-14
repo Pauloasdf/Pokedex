@@ -3,12 +3,11 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
-    lastname: String,
-    username: String,
-    password: String,
-    age: Number,
+    description: String,
+    iconURL: String,
     active: Boolean,
-    token: String
+    height: Number,
+    width: Number
 })
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("PokedexPage", userSchema);

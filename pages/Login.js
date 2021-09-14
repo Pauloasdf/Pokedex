@@ -6,12 +6,17 @@ import { useRouter } from "next/router";
 
 const Login = () => {
   const router = useRouter();
-  const [approved, setApproved] = useState(false);
-  const getResult = (result) => setApproved(result);
+  const [result, setResult] = useState(false);
+  const getResult = (value) => setResult(value);
   useEffect(() => {
-    if (approved)
+    if (result.approved) {
+      sessionStorage.setItem("poke_token", result.token);
+      setTimeout(() => {
+        sessionStorage.removeItem("poke_token");
+      }, 3600000)
       router.push("Pokedex");
-  }, [approved]);
+    }
+  }, [result]);
   return (
     <>
       <Grid

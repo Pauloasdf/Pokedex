@@ -10,17 +10,16 @@ const defaultHeaders = new Headers({
  * @constructor
  */
 const DoRequest = async (endpoint, data, method, headers = defaultHeaders) => {
-    let result = null;
     var requestConfig = {
         method: method,
         headers: headers,
-        body: JSON.stringify(data)
+        body: null
     };
-    return fetch(`${apiAddress}/${endpoint}`, {
-        method: method,
-        body: JSON.stringify(data),
-        headers
-    });
+
+    if (method !== "GET")
+        requestConfig.body = JSON.stringify(data);
+
+    return fetch(`${apiAddress}/${endpoint}`, requestConfig);
 }
 
 export default DoRequest;

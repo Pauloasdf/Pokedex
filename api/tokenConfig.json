@@ -1,0 +1,7 @@
+{
+  "secret": "pokedex-secret-token-159753",
+  "refreshTokenSecret": "pokedex-refresh-secret-token-9873561",
+  "port": 3000,
+  "tokenLife": "1h",
+  "refreshTokenLife": "24h"
+}

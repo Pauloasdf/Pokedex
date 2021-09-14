@@ -11,7 +11,6 @@ router.get("/", (request, response) => {
     User.find({}, { projection: { password: 0 } })
         .exec()
         .then((result) => {
-            console.log(result);
             response.status(200).json(result);
         })
 });
