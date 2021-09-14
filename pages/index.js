@@ -1,15 +1,39 @@
-import Head from 'next/head'
-import Login from './Login';
+import React, { useEffect, useState } from "react";
+import Grid from "@material-ui/core/Grid";
+import loginStyles from "../styles/Login.module.css";
+import { useRouter } from 'next/router'
 
-export default function Home() {
+
+const home = () => {
+  const router = useRouter();
+  const [imgClassName, setImgClassName] = useState(loginStyles.floating);
+  const [clicked, setClicked] = useState(false);
+  const imageClick = () => {
+    setImgClassName(loginStyles.growing);
+    setTimeout(() => {
+      setClicked(true)
+    }, 800);
+  }
+
+  useEffect(() => {
+    if (clicked)
+      router.push("/Login")
+  }, [clicked]);
+
   return (
-    <div >
-      <Head>
-        <title>Pokedex</title>
-        <meta name="description" content="Pokedex - developed by Paulo Avila" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Login />
-    </div >
-  )
-}
+    <>
+      <Grid container className={loginStyles.outerContainer}>
+        <Grid container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          item xs={12}
+          className={loginStyles.blackBackground}
+        >
+          <img src="/assets/pokedex.png" className={imgClassName} onClick={() => imageClick()}></img>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
+export default home;

@@ -8,7 +8,6 @@ const User = require('../models/user');
 
 //#region GETS
 router.get("/", (request, response) => {
-    console.log(typeof User)
     User.find({}, { projection: { password: 0 } })
         .exec()
         .then((result) => {

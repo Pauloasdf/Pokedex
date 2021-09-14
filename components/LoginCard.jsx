@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Paper, TextField, Button } from "@material-ui/core";
 import loginStyles from "../styles/Login.module.css";
 import PokeballGif from "../public/assets/floating-pokeball.gif";
 import Image from "next/image";
+import DoRequest from "../services/reqService";
 
-const LoginCard = () => {
-  console.log(process.env.REACT_APP_API_ADDRESS)
-  console.log(process.env.REACT_APP_API_PORT)
+const LoginCard = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    async function loginRequest() {
+      let result = await DoRequest("login", { username, password }, "POST");
+      result = await result.json();
+      props.validationFunction(result);
+    }
+    loginRequest();
+  };
+
   return (
     <Grid className={loginStyles.loginComponent}>
       <Paper elevation={10} className={loginStyles.paperStyle}>
@@ -17,6 +28,8 @@ const LoginCard = () => {
         <TextField
           label="Trainer name"
           placeholder="Enter Trainer name"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           fullWidth
           required
         />
@@ -24,6 +37,8 @@ const LoginCard = () => {
           label="Password"
           placeholder="Enter password"
           type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
           fullWidth
           required
         />
@@ -34,6 +49,7 @@ const LoginCard = () => {
           color="primary"
           variant="contained"
           className={loginStyles.singInButton}
+          onClick={() => handleSubmit()}
           fullWidth
         >
           GO!
