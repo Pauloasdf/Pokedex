@@ -5,6 +5,7 @@ mongoose.Promise = global.Promise;
 
 const userRoute = require("./api/routes/userRoute");
 const loginRoute = require("./api/routes/loginRoute");
+const pokedexRoute = require("./api/routes/pokedexRoute");
 
 mongoose.connect("mongodb://localhost:27017/DesenvWeb1", { useMongoClient: true }).then(() => console.log("Server up!"));
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use("/users", userRoute);
 app.use("/login", loginRoute);
+app.use("/pokedex", pokedexRoute);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

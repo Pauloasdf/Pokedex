@@ -1,0 +1,61 @@
+.navbar {
+  background-color: #353535;
+  padding-left: 40px !important;
+}
+.waterMark {
+  opacity: 0.8;
+}
+.waterMarkMoved {
+  opacity: 0.8;
+  -webkit-animation: spin 400ms linear normal,
+    moveLeftToRight 0.5s linear normal;
+  -moz-animation: spin 400ms linear normal, moveLeftToRight 0.5s linear normal;
+  -ms-animation: spin 400ms linear normal, moveLeftToRight 0.5s linear normal;
+  animation: spin 400ms linear normal, moveLeftToRight 0.5s linear normal;
+}
+.waterMarkBackToOrigin {
+  opacity: 0.8;
+  -webkit-animation: spinReverse 400ms linear normal,
+    moveLeftToRight 0.5s linear normal;
+  -moz-animation: spinReverse 400ms linear normal,
+    moveLeftToRight 0.5s linear normal;
+  -ms-animation: spinReverse 400ms linear normal,
+    moveLeftToRight 0.5s linear normal;
+  animation: spinReverse 400ms linear normal, moveLeftToRight 0.5s linear normal;
+}
+.drawerIcons {
+  color: white;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spinReverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes spinReverse {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
