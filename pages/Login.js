@@ -10,10 +10,6 @@ const Login = () => {
   const getResult = (value) => setResult(value);
   useEffect(() => {
     if (result.approved) {
-      sessionStorage.setItem("poke_token", result.token);
-      setTimeout(() => {
-        sessionStorage.removeItem("poke_token");
-      }, 3600000)
       router.push("Pokedex");
     }
   }, [result]);

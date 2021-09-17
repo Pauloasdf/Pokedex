@@ -11,8 +11,17 @@ const LoginCard = (props) => {
 
   const handleSubmit = () => {
     async function loginRequest() {
-      let result = await DoRequest("login", { username, password }, "POST");
+      let result = await DoRequest(
+        "login",
+        { username, password },
+        "POST",
+        false
+      );
       result = await result.json();
+      if (result && result.approved) {
+        sessionStorage.setItem("token", result.token);
+        sessionStorage.setItem("username", username);
+      }
       props.validationFunction(result);
     }
     loginRequest();

@@ -14,11 +14,10 @@ const home = () => {
       setClicked(true)
     }, 800);
   }
-  
-  // setInterval(() => {
-  //   if (sessionStorage && !sessionStorage.getItem("poke_token"))
-  //     router.push("/Login");
-  // }, process.env.LOGIN_VALIDATION_INTERVAL)
+
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   useEffect(() => {
     if (clicked)

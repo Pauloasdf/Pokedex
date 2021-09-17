@@ -1,15 +1,12 @@
 const apiAddress = `${process.env.API_ADDRESS}:${process.env.API_PORT}`;
-const defaultHeaders = new Headers({
-    "Content-Type": "application/json",
-    "Accept": "*",
-    "Connection": "keep-alive"
-})
+
+const setHeaderProp = (header, propName, propValue) => header[propName] = propValue;
 /**
  * Makes a request to API. Receives the requisition url on path, the data, the req method and 
  * req headers (optional)
  * @constructor
  */
-const DoRequest = async (endpoint, data, method, headers = defaultHeaders) => {
+const DoRequest = async (endpoint, data, method, hasAuth = true, headers = {}) => {
     var requestConfig = {
         method: method,
         headers: headers,
@@ -19,7 +16,20 @@ const DoRequest = async (endpoint, data, method, headers = defaultHeaders) => {
     if (method !== "GET")
         requestConfig.body = JSON.stringify(data);
 
-    return fetch(`${apiAddress}/${endpoint}`, requestConfig);
+    if (Object.entries(requestConfig.headers) == 0) {
+        setHeaderProp(requestConfig.headers, "Content-Type", "application/json");
+        setHeaderProp(requestConfig.headers, "Accept", "*");
+        setHeaderProp(requestConfig.headers, "Connection", "keep-alive");
+    }
+
+    if (hasAuth) {
+        setHeaderProp(requestConfig.headers, "Authorization",
+            (sessionStorage)
+                ? sessionStorage.getItem("token") + "UserName" + sessionStorage.getItem("username")
+                : null);
+    }
+
+    return fetch(`${apiAddress}/${endpoint}`, requestConfig); G
 }
 
 export default DoRequest;
