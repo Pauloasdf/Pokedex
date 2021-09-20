@@ -24,15 +24,14 @@ class LoginService {
                     User.update({ _id: result[0]._id }, { $set: { token, ...result } })
                         .exec()
                         .catch(() => {
-                            response.status(500).json({ message: "Could not update user." });
+                            response.status(500).json({ message: "Could not update user token." });
                         })
 
                     response.status(201).json(responseJSON);
                 }
                 else
-                    response.status(500).json("There is no user with theese credentials.");
+                    response.status(401).json("User unauthorized.");
             })
-
     }
 }
 module.exports = LoginService;

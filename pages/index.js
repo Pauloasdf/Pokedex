@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import loginStyles from "../styles/Login.module.css";
 import { useRouter } from 'next/router'
 
-
 const home = () => {
   const router = useRouter();
   const [imgClassName, setImgClassName] = useState(loginStyles.floating);
